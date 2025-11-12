@@ -1,7 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+test.describe('Main page testing suite', ()=>{
+  test.beforeEach(async({ page })=> {
+    await page.goto('https://playwright.dev/');
+  });
+
 test('Header: Navigation elements visibility check', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect.soft(page.getByRole('link', { name: 'Playwright logo Playwright' })).toBeVisible();
   await expect.soft(page.getByRole('link', { name: 'Docs' })).toBeVisible();
   await expect.soft(page.getByRole('link', { name: 'API' })).toBeVisible();
@@ -15,7 +19,6 @@ test('Header: Navigation elements visibility check', async ({ page }) => {
 });
 
 test('Header: Navigation element names check', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect.soft(page.getByLabel('Main', { exact: true }).locator('b')).toContainText('Playwright');
   await expect.soft(page.getByLabel('Main', { exact: true })).toContainText('Docs');
   await expect.soft(page.getByLabel('Main', { exact: true })).toContainText('API');
@@ -25,7 +28,6 @@ test('Header: Navigation element names check', async ({ page }) => {
 });
 
 test('Header: Navigation element href attributes check', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
   await expect.soft(page.getByRole('link', { name: 'Playwright logo Playwright' })).toHaveAttribute('href','/');
   await expect.soft(page.getByRole('link', { name: 'Docs' })).toHaveAttribute('href','/docs/intro');
   await expect.soft(page.getByRole('link', { name: 'API' })).toHaveAttribute('href','/docs/api/class-playwright');
@@ -36,7 +38,6 @@ test('Header: Navigation element href attributes check', async ({ page }) => {
 });
 
 test('Header: Light/Dark mode toggle check', async ({ page }) => {
- await page.goto('https://playwright.dev/');
  await page.getByLabel('Switch between dark and light').click();
  await expect.soft(page.locator('html')).toHaveAttribute('data-theme', 'light');
  await page.getByLabel('Switch between dark and light').click();
@@ -45,7 +46,6 @@ test('Header: Light/Dark mode toggle check', async ({ page }) => {
 });
 
 test('Page Header Validation', async ({ page }) => {
- await  page.goto('https://playwright.dev/');
  await expect.soft(page.getByRole('heading', { name: 'Playwright enables reliable' })).toBeVisible();
  await expect.soft(page.getByRole('heading', { name: 'Playwright enables reliable' })).toContainText('Playwright enables reliable end-to-end testing for modern web apps.');
 
@@ -53,8 +53,11 @@ test('Page Header Validation', async ({ page }) => {
 });
 
 test('Get Started Validation', async ({ page }) => {
- await  page.goto('https://playwright.dev/');
  await expect.soft(page.getByRole('link',{ name: 'Get started' })).toBeVisible();
  await expect.soft(page.getByRole('link',{ name: 'Get started' })).toContainText('Get started');
  await expect.soft(page.getByRole('link',{ name: 'Get started' })).toHaveAttribute('href','/docs/intro');
  });
+
+
+});
+
